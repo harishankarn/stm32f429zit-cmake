@@ -3,7 +3,7 @@ Application
 build
 cmake
 Core/*
-!Core/Src
+!Core/startup_stm32f429zitx.s
 CubeMX
 CMakePresets.json
 
