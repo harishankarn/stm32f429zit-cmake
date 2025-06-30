@@ -5,7 +5,6 @@ cmake
 Core
 CubeMX
 Drivers
-STM32_svd
 CMakeLists.txt
 CMakePresets.json
 
