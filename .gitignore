@@ -4,7 +4,10 @@ build
 cmake
 Core
 CubeMX
-Drivers
+Drivers/*
+!Drivers/CMSIS/
+Drivers/CMSIS/*
+!Drivers/CMSIS/Device/
 CMakeLists.txt
 CMakePresets.json
 
