@@ -1,5 +1,5 @@
 # Build and generated files
-build
+/build/
 build/Debug/.ninja_deps
 build/Debug/.ninja_log
 CMakeFiles/
