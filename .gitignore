@@ -1,6 +1,6 @@
 # Temporary ignores
 Application/*
-!Application/Inc/
+!Application/Src/
 
 CMakePresets.json
 
