@@ -22,7 +22,7 @@
         // "gdbPath": " {Set gdb path manually}",
 
     },
-// ============ This Setup File made for st-link/openocd so make adjustments accordingly below ============
+// ============ This configuration file is made for st-link/openocd so make adjustments accordingly below ============
     {
         "name": "Debug with J-Link",
         "type": "cortex-debug",
