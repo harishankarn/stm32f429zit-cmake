@@ -6,6 +6,7 @@ CubeMX/*                # Ignore all generated files from CubeMX...
 !CubeMX/CubeMX.ioc           # ...except the .ioc (keep it tracked)
 Makefile
 CMakeCache.txt
+compile_commands.json
 
 # CubeMX generated files
 *.ioc
