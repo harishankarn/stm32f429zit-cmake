@@ -1,34 +1,23 @@
-/*	Find where USB B connection is connected with board via UART/USART
- *	Board : STM32F429ZI
- * 	This USB communicates via Virtual COMM Port through USART1
- * 	USART1 address : 0x4001 1000 - 0x4001 13FF
- * 	TX_Port: Port A
- * 	TX_Pin: 9
- *
- *	RX_Port: Port A
- *	RX_Pin: 10
- *
- *	Address Bus : APB2 90 MHZ @ USART1
- *
- * 	USART1 uses GPIOA : PA09(TX) PA10(RX)
- * 	So,
- * 		- need to map with alternate function mapping in Data sheet
- * 		- find type of alternate function (AF7)
- */
+// Find where the led is connected to the board in schematic
+// Board : STM32F429ZI
+// Port: Port G
+// Pin: 13 [MODER bit 27:26]
+// Address Bus : AHB1 180 MHZ @ GPIO - G
+#include "stm32f4xx.h"
 
-
-#include <stdio.h>		// Standard Input/Output library
-#include "UART.h"
+#define GPIOGEN  			(1U<<6)
+#define PIN13				(1U<<13)
+#define LED_PIN 			PIN13
 
 
 int main(void){
-	usart1_tx_init();
+	RCC->AHB1ENR |= GPIOGEN;
 
+	GPIOG->MODER |= (1U<<26); 	// sets only Bit 26 to one
+	GPIOG->MODER &= ~(1U<<27);	// sets only Bit 27 to zero
 	while(1)
 	{
-		printf("/********Checking text printing********/\n\r");
-		for(volatile int i = 0; i < 100000; i++);
+		GPIOG->ODR ^= LED_PIN;
+		for(int i=0;i<100000;i++);
 	}
 }
-
-

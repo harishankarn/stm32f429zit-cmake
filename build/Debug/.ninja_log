@@ -1,0 +1,8 @@
+# ninja log v7
+1	20	1751282768469798340	CMakeFiles/STM32-cmake-tmp-trial.dir/Core/startup_stm32f429zitx.s.obj	f1105aaf33220591
+1	49	1751282768469580883	CMakeFiles/STM32-cmake-tmp-trial.dir/Core/Src/sysmem.c.obj	90d218c55a4cb136
+1	62	1751282768469460300	CMakeFiles/STM32-cmake-tmp-trial.dir/Core/Src/syscalls.c.obj	535c6e8c48c9100c
+1	101	1751282768469257883	CMakeFiles/STM32-cmake-tmp-trial.dir/Application/Src/main.c.obj	1c7041a5bb238436
+1	105	1751282768470223339	CMakeFiles/STM32-cmake-tmp-trial.dir/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c.obj	910fa57381e6375f
+1	109	1751282768469687841	CMakeFiles/STM32-cmake-tmp-trial.dir/Core/Src/UART.c.obj	e5da7559935041d6
+109	149	1751282768577832222	STM32-cmake-tmp-trial.elf	ff3c92c22bc20ede
