@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-        "name": "Debug with ST-Link",
+        "name": "Debug with OpenOCD",
         "type": "cortex-debug",
         "request": "launch",
-        "servertype": "stlink",                     // stlink or openocd
+        "servertype": "openocd",                     // stlink or openocd
         "cwd": "${workspaceFolder}",
         "executable": "${command:cmake.launchTargetPath}",
         "interface": "swd",
@@ -18,10 +18,11 @@
         "target/stm32f4x.cfg"
         ],
         "runToEntryPoint": "main",                  // Run to main and stop there [optional]
-        "svdFile": "STM32_svd/STM32F429.svd"        // SVD file to see registers [optional]
-    },
+        "svdFile": "STM32_svd/STM32F429.svd",       // SVD file to see registers [optional]
+        // "gdbPath": " {Set gdb path manually}",
 
-    // Setup File made for st-link so make adjustments accordingly
+    },
+// ============ This Setup File made for st-link/openocd so make adjustments accordingly below ============
     {
         "name": "Debug with J-Link",
         "type": "cortex-debug",
