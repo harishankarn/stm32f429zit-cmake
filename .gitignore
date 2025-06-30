@@ -8,7 +8,7 @@ Drivers
 STM32_svd
 CMakeLists.txt
 CMakePresets.json
-getIncludeList.sh
+
 getSourceList.sh
 # Build and generated files
 build/                  # Ignore build artifacts
