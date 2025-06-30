@@ -3,7 +3,7 @@ Application
 build
 cmake
 Core/*
-!Core/Inc
+!Core/Src
 CubeMX
 CMakePresets.json
 
