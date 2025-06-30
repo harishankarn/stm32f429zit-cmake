@@ -7,7 +7,7 @@ CubeMX
 Drivers/*
 !Drivers/CMSIS/
 Drivers/CMSIS/*
-!Drivers/CMSIS/Device/
+!Drivers/CMSIS/Include/
 CMakeLists.txt
 CMakePresets.json
 
