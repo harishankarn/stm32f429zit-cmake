@@ -18,6 +18,6 @@ int main(void){
 	while(1)
 	{
 		GPIOG->ODR ^= LED_PIN;
-		for(int i=0;i<100000;i++);
+		for(int i=0;i<1000000;i++);
 	}
 }
