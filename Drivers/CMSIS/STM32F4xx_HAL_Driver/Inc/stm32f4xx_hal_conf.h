@@ -123,6 +123,11 @@
  #define LSE_VALUE               32768U    /*!< Value of the External Low Speed oscillator in Hz */
 #endif /* LSE_VALUE */
 
+#ifndef LSI_STARTUP_TIME
+  #define LSI_STARTUP_TIME        100UL  // in microseconds (adjust if needed)
+
+#endif
+
 #if !defined  (LSE_STARTUP_TIMEOUT)
   #define LSE_STARTUP_TIMEOUT    5000U     /*!< Time out for LSE start up, in ms */
 #endif /* LSE_STARTUP_TIMEOUT */
