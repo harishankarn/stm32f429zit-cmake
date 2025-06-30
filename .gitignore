@@ -3,7 +3,7 @@ Application
 build
 cmake
 Core/*
-!Core/startup_stm32f429zitx.s
+!Core/STM32F429ZITX_FLASH.ld
 CubeMX
 CMakePresets.json
 
