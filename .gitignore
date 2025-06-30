@@ -1,7 +1,9 @@
 # Temporary ignores
 Application
 build
-Core
+cmake
+Core/*
+!Core/Inc
 CubeMX
 CMakePresets.json
 
