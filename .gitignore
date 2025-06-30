@@ -1,6 +1,4 @@
 # Temporary ignores
-.vscode/*
-.vscode/tasks.json
 Application
 build
 cmake
