@@ -1,13 +1,8 @@
 # Temporary ignores
 Application
 build
-cmake
 Core
 CubeMX
-Drivers/*
-!Drivers/CMSIS/
-Drivers/CMSIS/*
-!Drivers/CMSIS/STM32F4xx_HAL_Driver/
 CMakeLists.txt
 CMakePresets.json
 
