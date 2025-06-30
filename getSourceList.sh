@@ -5,7 +5,8 @@
 # Define the path to the source code
 APP_PATH='Application/*'
 CORE_PATH='Core/*'
-DRIVERS_PATH='Drivers/*'
+DRIVERS_PATH='Drivers/CMSIS/Device/*' # <----Changed path from Drivers/* which included STM32F4xx_HAL_Driver
+
 # FATFS_PATH='FATFS/*'
 # MIDWARE_PATH='Middlewares/*'
 # USB_PATH='USB_Device/*'
