@@ -1,0 +1,49 @@
+# Temporary ignores
+.vscode/*
+.vscode/tasks.json
+Application
+build
+cmake
+Core
+CubeMX
+Drivers
+STM32_svd
+CMakeLists.txt
+CMakePresets.json
+getIncludeList.sh
+getSourceList.sh
+# Build and generated files
+build/                  # Ignore build artifacts
+CMakeFiles/
+cmake_install.cmake
+CubeMX/*                # Ignore all generated files from CubeMX...
+CubeMX/*.ioc           # ...except the .ioc (keep it tracked)
+docs/*                  # Ignore documentation
+docs/
+Makefile
+compile_commands.json/
+CMakeCache.txt
+# CubeMX generated files (optional if regenerable)
+*.ioc
+MX_*/             # CubeMX backup/project folders
+*.log
+*.launch
+
+# Binary output
+*.elf
+*.hex
+*.bin
+*.map
+
+# Binary output
+*.elf
+*.hex
+*.bin
+*.map
+
+# Editor files
+*.swp
+*~
+
+# macOS metadata
+.DS_Store
