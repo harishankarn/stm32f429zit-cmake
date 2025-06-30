@@ -1,7 +1,5 @@
 # Build and generated files
 /build/
-build/Debug/.ninja_deps
-build/Debug/.ninja_log
 CMakeFiles/
 cmake_install.cmake
 CubeMX/*                # Ignore all generated files from CubeMX...
