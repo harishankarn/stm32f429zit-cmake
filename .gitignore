@@ -3,23 +3,15 @@ build/                  # Ignore build artifacts
 CMakeFiles/
 cmake_install.cmake
 CubeMX/*                # Ignore all generated files from CubeMX...
-CubeMX/*.ioc           # ...except the .ioc (keep it tracked)
-docs/*                  # Ignore documentation
-docs/
+!CubeMX/CubeMX.ioc           # ...except the .ioc (keep it tracked)
 Makefile
-compile_commands.json/
 CMakeCache.txt
-# CubeMX generated files (optional if regenerable)
+
+# CubeMX generated files
 *.ioc
 MX_*/             # CubeMX backup/project folders
 *.log
 *.launch
-
-# Binary output
-*.elf
-*.hex
-*.bin
-*.map
 
 # Binary output
 *.elf
