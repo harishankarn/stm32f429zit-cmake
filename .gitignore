@@ -9,7 +9,7 @@ STM32_svd
 CMakeLists.txt
 CMakePresets.json
 
-getSourceList.sh
+
 # Build and generated files
 build/                  # Ignore build artifacts
 CMakeFiles/
