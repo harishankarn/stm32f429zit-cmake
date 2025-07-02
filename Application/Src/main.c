@@ -1,23 +1,37 @@
-// Find where the led is connected to the board in schematic
-// Board : STM32F429ZI
-// Port: Port G
-// Pin: 13 [MODER bit 27:26]
-// Address Bus : AHB1 180 MHZ @ GPIO - G
-#include "stm32f4xx.h"
+/*	Find where USB B connection is connected with board via UART/USART
+ *	Board : STM32F429ZI
+ * 	This USB communicates via Virtual COMM Port through USART1
+ * 	USART1 address : 0x4001 1000 - 0x4001 13FF
+ * 	TX_Port: Port A
+ * 	TX_Pin: 9
+ *
+ *	RX_Port: Port A
+ *	RX_Pin: 10
+ *
+ *	Address Bus : APB2 90 MHZ @ USART1
+ *
+ * 	USART1 uses GPIOA : PA09(TX) PA10(RX)
+ * 	So,
+ * 		- need to map with alternate function mapping in Data sheet
+ * 		- find type of alternate function (AF7)
+ */
+#include <stdio.h>
+#include "ADC.h"
+#include "UART.h"
+#include "systick.h"
+#include "LED.h"
+#include "timer.h"
 
-#define GPIOGEN  			(1U<<6)
-#define PIN13				(1U<<13)
-#define LED_PIN 			PIN13
+uint32_t sensor_value;
 
+int main(void) {
+    LED_init();                      // Ensure your LED is initialized
+    tim2_output_pa5_compare();      // Starts TIM2 in output compare mode
 
-int main(void){
-	RCC->AHB1ENR |= GPIOGEN;
-
-	GPIOG->MODER |= (1U<<26); 	// sets only Bit 26 to one
-	GPIOG->MODER &= ~(1U<<27);	// sets only Bit 27 to zero
-	while(1)
-	{
-		GPIOG->ODR ^= LED_PIN;
-		for(int i=0;i<1000000;i++);
-	}
+    while (1) {
+        if (TIM2->SR & TIM_SR_CC1IF) {
+            TIM2->SR &= ~TIM_SR_CC1IF;  // Clear compare match flag
+            LED_toggle(0);               // Blink LED every 1s
+        }
+    }
 }

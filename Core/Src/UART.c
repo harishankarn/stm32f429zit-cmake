@@ -6,9 +6,11 @@
 #define APB2_CLK		SYS_FREQ
 
 #define CR1_TE			(1U<<3)
+#define CR1_RE 			(1U<<2)
 #define CR1_UE			(1U<<13)
 
 #define SR_TXE			(1U<<7)
+#define SR_RXNE			(1U<<5)
 
 #define UART_BAUDRATE	115200
 
@@ -43,9 +45,52 @@ void usart1_tx_init(void){
 	/*Enable clock access to GPIOA*/
 	RCC->AHB1ENR |= GPIOAEN;
 
+	/*Set PA09 to alternate function mode*/
+	GPIOA->MODER &= ~(1U<<18);
+	GPIOA->MODER |= (1U<<19);
+
+	/*Set PA09 & PA10 to alternate function type to UART_TX (AF7)*/
+	/* Notes :
+	 * 	- Pin number corresponds to x in AFRHx
+	 * 	- All pin 1 are in AFRL1
+	 * 	- All pin 9 are in AFRH9
+	 */
+
+	/* Note : There is no AFRL/AFRH in ST header, instead
+	 * AFR[0] = AFRL
+	 * AFR[1] = AFRH
+	 */
+
+	GPIOA->AFR[1] &= ~(0xFU<<4);
+	GPIOA->AFR[1] |=  (0x7U<<4);
+
+	/************Configure USART Module***********/
+	/*Enable clock access to USART1*/
+	RCC->APB2ENR |= USART1EN;
+
+	/*Configure USART Baud rate*/
+	uart_set_baudrate(USART1,APB2_CLK,UART_BAUDRATE);
+
+	/*Configure transfer direction*/
+	/* For transmission */
+	USART1->CR1 = CR1_TE;
+
+	/*Enable USART module*/
+	USART1->CR1 |= CR1_UE;
+}
+
+void usart1_rxtx_init(void){
+	/************Configure USART GPIO pins***********/
+	/*Enable clock access to GPIOA*/
+	RCC->AHB1ENR |= GPIOAEN;
+
 	/*Set PA09 & PA10 to alternate function mode*/
 	GPIOA->MODER &= ~(1U<<18);
 	GPIOA->MODER |= (1U<<19);
+
+	/*Set PA10 to alternate function mode*/
+	GPIOA->MODER &= ~(1U<<20);
+	GPIOA->MODER |= (1U<<21);
 
 	/*Set PA09 & PA10 to alternate function type to UART_TX (AF7)*/
 	/* Notes :
@@ -62,7 +107,8 @@ void usart1_tx_init(void){
 	GPIOA->AFR[1] &= ~(0xFU<<4);
 	GPIOA->AFR[1] |=  (0x7U<<4);
 
-
+	GPIOA->AFR[1] &= ~(0xFU<<8);
+	GPIOA->AFR[1] |=  (0x7U<<8);
 
 	/************Configure USART Module***********/
 	/*Enable clock access to USART1*/
@@ -72,13 +118,20 @@ void usart1_tx_init(void){
 	uart_set_baudrate(USART1,APB2_CLK,UART_BAUDRATE);
 
 	/*Configure transfer direction*/
-	USART1->CR1 = CR1_TE;
+	/* For transmission & receiver*/
+	USART1->CR1 = (CR1_TE | CR1_RE);
 
 	/*Enable USART module*/
 	USART1->CR1 |= CR1_UE;
 }
 
+char usart1_read(void){
+	/*Make sure receive data register is not empty*/
+	while(!(USART1->SR & SR_RXNE)){}
 
+	/*Read transmitted data register*/
+	return USART1->DR;
+}
 
 void usart1_write(int ch){
 	/* Make sure transmit data register is empty*/

@@ -13,8 +13,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS	ON)
 set(CMAKE_TOOLCHAIN_FILE			gcc-arm-none-eabi)
 
 # Project Name    --- MUST EDIT ---
-project(STM32-cmake-tmp-trial)
-#project(stm32f429zit-cmake)
+project(stm32f429zit-cmake)
+
 enable_language(C CXX ASM)
 
 set(PROJ_PATH                       ${PROJECT_SOURCE_DIR})
@@ -25,7 +25,6 @@ set(EXECUTABLE                      ${CMAKE_PROJECT_NAME})
 
 # MCU Parameters - I am storing all created profiles. Pick one to use.
 # include(STM32G431xx_HAL_PARA)
-# include(STM32L432xx_HAL_PARA)
 include(STM32F429xx_HAL_PARA)
 
 if(NOT CPU_PARAMETERS)
@@ -94,3 +93,11 @@ add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
 )
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+FetchContent_MakeAvailable(googletest)
+
