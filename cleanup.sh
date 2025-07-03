@@ -16,3 +16,11 @@ else
     echo "./CMakeCache.txt has already been removed"
 fi
 
+# Remove test
+if [ -f "./CMakeCache.txt" ]; then
+    rm -rf ./test*
+    echo "Removed ./test*"
+else
+    echo "./test* has already been removed"
+fi
+

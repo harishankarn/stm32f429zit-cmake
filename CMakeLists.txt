@@ -15,6 +15,7 @@ set(CMAKE_TOOLCHAIN_FILE			gcc-arm-none-eabi)
 # Project Name    --- MUST EDIT ---
 project(stm32f429zit-cmake)
 
+
 enable_language(C CXX ASM)
 
 set(PROJ_PATH                       ${PROJECT_SOURCE_DIR})
@@ -79,6 +80,13 @@ target_link_options(${EXECUTABLE} PRIVATE
 	-Wl,--print-memory-usage
 )
 
+#Setup testing
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+
+
+
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXECUTABLE}>
@@ -94,10 +102,10 @@ add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
 )
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/heads/main.zip
-)
-FetchContent_MakeAvailable(googletest)
+#include(FetchContent)
+#FetchContent_Declare(
+#  googletest
+#  URL https://github.com/google/googletest/archive/refs/heads/main.zip
+#)
+#FetchContent_MakeAvailable(googletest)
 
