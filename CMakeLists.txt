@@ -81,11 +81,28 @@ target_link_options(${EXECUTABLE} PRIVATE
 )
 
 #Setup testing
+#enable_testing()
+#find_package(GTest REQUIRED)
+#include_directories(${GTEST_INCLUDE_DIR})
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  # URL https://github.com/google/googletest/archive/refs/heads/main.zip
+   URL https://github.com/google/googletest.git
+   GIT_TAG main
+)
+FetchContent_MakeAvailable(googletest)
+
+
+#Setup testing
+include(GoogleTest)
 enable_testing()
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIR})
-
-
+add_executable(test dummy.cpp)
+target_link_libraries(test PRIVATE gtest pthread gtest_main)
+gtest_discover_tests(test)
+#find_package(GTest REQUIRED)
+#include_directories(${GTEST_INCLUDE_DIR})
 
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
@@ -101,11 +118,4 @@ add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
 )
-
-#include(FetchContent)
-#FetchContent_Declare(
-#  googletest
-#  URL https://github.com/google/googletest/archive/refs/heads/main.zip
-#)
-#FetchContent_MakeAvailable(googletest)
 
