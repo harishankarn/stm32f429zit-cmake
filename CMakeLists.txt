@@ -98,9 +98,9 @@ FetchContent_MakeAvailable(googletest)
 #Setup testing
 include(GoogleTest)
 enable_testing()
-add_executable(test dummy.cpp)
-target_link_libraries(test PRIVATE gtest pthread gtest_main)
-gtest_discover_tests(test)
+add_executable(Tests dummy.cpp)
+target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
+gtest_discover_tests(Tests)
 #find_package(GTest REQUIRED)
 #include_directories(${GTEST_INCLUDE_DIR})
 
