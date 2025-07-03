@@ -80,10 +80,6 @@ target_link_options(${EXECUTABLE} PRIVATE
 	-Wl,--print-memory-usage
 )
 
-#Setup testing
-#enable_testing()
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
 
 include(FetchContent)
 FetchContent_Declare(
