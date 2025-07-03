@@ -99,10 +99,10 @@ FetchContent_MakeAvailable(googletest)
 include(GoogleTest)
 enable_testing()
 #add_executable(Tests dummy.cpp)
-#target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
 gtest_discover_tests(Tests)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
+target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
 
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
