@@ -31,6 +31,18 @@ if(NOT CPU_PARAMETERS)
 	message(FATAL_ERROR "CPU_PARAMETERS not set. Check HAL_PARA file.")
 endif()
 
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+   URL https://github.com/google/googletest/archive/refs/heads/main.zip
+   # URL https://github.com/google/googletest.git
+   GIT_TAG main
+)
+FetchContent_MakeAvailable(googletest)
+
+
+
+
 # USE ./getIncludeList.sh and ./getSourceList.sh to generate file list
 # Include List, Source List, and MCU Sepecific Setting
 # Must Update these files in cmake/ when adding new source files
@@ -94,14 +106,6 @@ add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
 )
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-   URL https://github.com/google/googletest/archive/refs/heads/main.zip
-   # URL https://github.com/google/googletest.git
-   GIT_TAG main
-)
-FetchContent_MakeAvailable(googletest)
 
 
 
