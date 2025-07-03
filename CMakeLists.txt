@@ -88,8 +88,8 @@ target_link_options(${EXECUTABLE} PRIVATE
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  # URL https://github.com/google/googletest/archive/refs/heads/main.zip
-   URL https://github.com/google/googletest.git
+   URL https://github.com/google/googletest/archive/refs/heads/main.zip
+   # URL https://github.com/google/googletest.git
    GIT_TAG main
 )
 FetchContent_MakeAvailable(googletest)
