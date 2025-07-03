@@ -102,8 +102,8 @@ enable_testing()
 gtest_discover_tests(Tests)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
-target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
-
+#target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
+add_subdirectory(Tests)
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXECUTABLE}>
