@@ -101,8 +101,8 @@ enable_testing()
 #add_executable(Tests dummy.cpp)
 #target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
 gtest_discover_tests(Tests)
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
 
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
