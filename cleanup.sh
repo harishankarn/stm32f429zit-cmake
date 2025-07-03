@@ -17,7 +17,7 @@ else
 fi
 
 # Remove test
-if [ -f "./CMakeCache.txt" ]; then
+if [ -f "./test" ]; then
     rm -rf ./test*
     echo "Removed ./test*"
 else
