@@ -81,9 +81,9 @@ target_link_options(${EXECUTABLE} PRIVATE
 )
 
 #Setup testing
-#enable_testing()
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
 
 
 
