@@ -10,11 +10,10 @@ set(CMAKE_CXX_STANDARD              17)
 set(CMAKE_CXX_STANDARD_REQUIRED     ON)
 set(CMAKE_CXX_EXTENSIONS            ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS	ON)
-set(CMAKE_TOOLCHAIN_FILE	gcc-arm-none-eabi)
+set(CMAKE_TOOLCHAIN_FILE			gcc-arm-none-eabi)
 
 # Project Name    --- MUST EDIT ---
 project(stm32f429zit-cmake)
-
 
 enable_language(C CXX ASM)
 
@@ -31,6 +30,7 @@ include(STM32F429xx_HAL_PARA)
 if(NOT CPU_PARAMETERS)
 	message(FATAL_ERROR "CPU_PARAMETERS not set. Check HAL_PARA file.")
 endif()
+
 
 # USE ./getIncludeList.sh and ./getSourceList.sh to generate file list
 # Include List, Source List, and MCU Sepecific Setting
@@ -80,26 +80,6 @@ target_link_options(${EXECUTABLE} PRIVATE
 	-Wl,--print-memory-usage
 )
 
-
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-   URL https://github.com/google/googletest/archive/refs/heads/main.zip
-   # URL https://github.com/google/googletest.git
-   GIT_TAG main
-)
-FetchContent_MakeAvailable(googletest)
-
-
-#Setup testing
-#include(GoogleTest)
-#enable_testing()
-#add_executable(Tests dummy.cpp)
-#gtest_discover_tests(Application/Tests)
-#find_package(GTest REQUIRED)
-#include_directories(${GTEST_INCLUDE_DIR})
-#target_link_libraries(Application/Tests PRIVATE gtest pthread gtest_main)
-#add_subdirectory(Application/Tests)
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXECUTABLE}>
@@ -114,4 +94,7 @@ add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
 	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
 )
+
+
+
 
