@@ -102,7 +102,7 @@ enable_testing()
 #gtest_discover_tests(Application/Tests)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
-#target_link_libraries(Tests PRIVATE gtest pthread gtest_main)
+target_link_libraries(Application/Tests PRIVATE gtest pthread gtest_main)
 add_subdirectory(Application/Tests)
 # Execute post-build to print size
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
