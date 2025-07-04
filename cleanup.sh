@@ -17,10 +17,10 @@ else
 fi
 
 # Remove test
-if [ -d "./project" ]; then
-    sudo rm -rf ./project
-    echo "Removed ./project"
-else
-    echo "./project has already been removed"
-fi
+#if [ -d "./project" ]; then
+#    sudo rm -rf ./project
+#    echo "Removed ./project"
+#else
+#    echo "./project has already been removed"
+#fi
 

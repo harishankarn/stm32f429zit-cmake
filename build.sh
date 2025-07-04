@@ -1,23 +1,37 @@
 #!/bin/bash
 
+MODE=$1
+DOCKER_PATH=/app
+DOCKER_IMAGE=stm32-compiler
+
+if [ "${MODE}" != "host" ] && [ "${MODE}" != "docker" ]; then
+    echo "Usage: ./build.sh [host|docker]"
+    exit 1
+fi
+
 echo ""
-echo "=== Running cmake . ==="
-cmake .
-echo "=== cmake . DONE ==="
-echo ""
+echo "=== STM32 Build Script ==="
+echo "Build mode: ${MODE}"
 echo "----------------------------------"
 echo ""
 
-echo "=== Running cmake -B build ==="
-cmake -B build
-echo "=== cmake -B build DONE ==="
-echo ""
+echo "Cleaning build directory..."
+./cleanup.sh
+echo "Cleanup done."
 echo "----------------------------------"
 echo ""
 
-echo "=== Running cmake --build build ==="
-cmake --build build
-echo "=== Build DONE ==="
-echo ""
-echo "----------------------------------"
-echo ""
+if [ "${MODE}" == "docker" ]; then
+    echo "Running inside Docker container..."
+    docker run -it --rm -v "$(pwd)":$DOCKER_PATH $DOCKER_IMAGE
+
+elif [ "${MODE}" == "host" ]; then
+    echo "Running native CMake build on host..."
+
+    echo "=== Running cmake -B build ==="
+    cmake -B build
+    echo "=== Running cmake --build build ==="
+    cmake --build build
+    echo "=== Build DONE ==="
+fi
+
