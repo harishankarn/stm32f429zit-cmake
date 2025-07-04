@@ -66,7 +66,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	# Struct cmake format (Do not add tab space to line - 68)
 	sed -i '' '1s|^|set(include_list ${include_list}\n|; $s|$|\n)|' cmake/IncludeList.cmake
 
-	sed -i '' -e '$a\'$'\n'')' cmake/IncludeList.cmake
+	# Only add closing ')' if not already present
+	if [[ "$(tail -n 1 cmake/IncludeList.cmake)" != ")" ]]; then
+    	echo ")" >> cmake/IncludeList.cmake
+	fi
 else
 	# ========== FOR LINUX  ==========
 	# Remove Empty Line
@@ -77,5 +80,9 @@ else
 
 	# Struct cmake format
 	sed -i '1s|^|set(include_list ${include_list}\n|; $s|$|\n)|' cmake/IncludeList.cmake
-	sed -i '$a)' cmake/IncludeList.cmake
+
+	# Only add closing ')' if not already present
+	if [[ "$(tail -n 1 cmake/IncludeList.cmake)" != ")" ]]; then
+		echo ")" >> cmake/IncludeList.cmake
+	fi
 fi
