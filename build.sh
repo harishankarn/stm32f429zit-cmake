@@ -23,6 +23,7 @@ echo ""
 
 if [ "${MODE}" == "docker" ]; then
     echo "Running inside Docker container..."
+	echo "---> Make sure Docker Daemon is running <---"
     docker run -it --rm -v "$(pwd)":$DOCKER_PATH $DOCKER_IMAGE
 
 elif [ "${MODE}" == "host" ]; then
