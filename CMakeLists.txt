@@ -12,8 +12,14 @@ set(CMAKE_CXX_EXTENSIONS            ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS	ON)
 set(CMAKE_TOOLCHAIN_FILE			gcc-arm-none-eabi)
 
+# Read project name from config
+file(READ "${CMAKE_CURRENT_LIST_DIR}/project.conf" _project_config)
+string(REGEX MATCH "PROJECT_NAME=([^\n]*)" _match "${_project_config}")
+set(PROJECT_NAME "${CMAKE_MATCH_1}")
+
 # Project Name    --- MUST EDIT ---
-project(stm32f429zit-cmake)
+project(${PROJECT_NAME})
+#project(stm32f429zit-cmake)
 
 enable_language(C CXX ASM)
 
