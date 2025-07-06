@@ -24,7 +24,7 @@ echo ""
 if [ "${MODE}" == "docker" ]; then
     echo "Running inside Docker container..."
 	echo "---> Make sure Docker Daemon is running <---"
-    docker run -it --rm -v "$(pwd)":$DOCKER_PATH $DOCKER_IMAGE
+    docker run -it --rm --name stm32_container -v "$(pwd)":$DOCKER_PATH $DOCKER_IMAGE
 
 elif [ "${MODE}" == "host" ]; then
     echo "Running native CMake build on host..."
