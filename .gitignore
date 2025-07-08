@@ -10,6 +10,7 @@ compile_commands.json
 cmake/IncludeList.cmake
 cmake/SourceList.cmake
 *.bat
+
 # CubeMX generated files
 *.ioc
 MX_*/             # CubeMX backup/project folders
