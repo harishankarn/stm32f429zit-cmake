@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# ====== FOR UNIX MACHINE =====
 MODE=$1
 DOCKER_PATH=/app
 DOCKER_IMAGE=stm32-compiler
