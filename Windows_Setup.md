@@ -1,8 +1,14 @@
-# ⚙ Windows + WSL Setup Guide (with USB Support)
+# 🔧 Embedded Development Environment Setup Guide
 
-## 1. Install WSL (Ubuntu)
+This guide covers setup for **Windows (WSL)**, **macOS**, and **Linux** for embedded development with OpenOCD and USB device support.
 
-### a. Enable Required Windows Features
+---
+
+## 🪟 Windows (WSL) Setup
+
+### 1. Install WSL (Ubuntu)
+
+#### a. Enable Required Windows Features
 
 Go to **Control Panel → Programs → Turn Windows features on or off**, and enable:
 
@@ -16,7 +22,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
-### b. Install WSL
+#### b. Install WSL
 
 ```powershell
 wsl --install
@@ -33,7 +39,7 @@ This installs:
 
 ---
 
-## 2. Install Docker for Windows
+### 2. Install Docker for Windows
 
 Download & install Docker:
 👉 [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
@@ -46,7 +52,7 @@ Enable WSL 2 integration in Docker settings:
 
 ---
 
-## 3. Clone the Project
+### 3. Clone the Project
 
 Inside WSL (Ubuntu) terminal:
 
@@ -59,7 +65,7 @@ Replace with actual project link.
 
 ---
 
-## 4. Install OpenOCD (Inside WSL)
+### 4. Install OpenOCD (Inside WSL)
 
 ```bash
 sudo apt update
@@ -70,18 +76,18 @@ sudo apt install openocd
 
 ---
 
-## 5. Enable USB Access in WSL
+### 5. Enable USB Access in WSL
 
 Microsoft Guide:
 👉 [https://learn.microsoft.com/en-us/windows/wsl/connect-usb](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
 
-### a. Install `usbipd-win` (on Windows)
+#### a. Install `usbipd-win` (on Windows)
 
 ```powershell
 winget install --interactive --exact dorssel.usbipd-win
 ```
 
-### b. Bind USB device
+#### b. Bind USB device
 
 ```powershell
 usbipd list
@@ -89,13 +95,13 @@ usbipd bind --busid <busid>
 usbipd attach --wsl --busid <busid>
 ```
 
-### c. Install tools inside WSL
+#### c. Install tools inside WSL
 
 ```bash
 sudo apt install linux-tools-$(uname -r) linux-cloud-tools-$(uname -r)
 ```
 
-### d. Restart WSL
+#### d. Restart WSL
 
 ```powershell
 wsl --shutdown
@@ -103,7 +109,7 @@ wsl --shutdown
 
 Then relaunch Ubuntu.
 
-### e. Confirm device in WSL
+#### e. Confirm device in WSL
 
 ```bash
 lsusb
@@ -111,7 +117,7 @@ lsusb
 
 Should list your ST-Link/J-Link/CMSIS-DAP.
 
-### f. Detach USB device
+#### f. Detach USB device
 
 ```powershell
 usbipd detach --busid <busid>
@@ -119,4 +125,61 @@ usbipd detach --busid <busid>
 
 ---
 
-Now you're ready to use OpenOCD and interface with dev boards from WSL.
+## 🍎 macOS Setup
+
+### 1. Install Homebrew (if not installed)
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 2. Install OpenOCD
+
+```bash
+brew install openocd
+```
+
+> ✅ Confirm installation: `openocd --version`
+
+### 3. Install USB tools
+
+```bash
+brew install usbutils
+```
+
+> ✅ Confirm USB device detection:
+
+```bash
+lsusb
+```
+
+> 📦 If `lsusb` fails: macOS may need additional drivers or permissions for certain USB tools. Consider using `brew install libusb` and checking `system_profiler SPUSBDataType`.
+
+---
+
+## 🐧 Linux Setup (Native Ubuntu/Debian)
+
+### 1. Install required packages
+
+```bash
+sudo apt update
+sudo apt install openocd usbutils
+```
+
+> ✅ Confirm:
+
+```bash
+openocd --version
+lsusb
+```
+
+### 2. Clone the Project
+
+```bash
+git clone https://github.com/your-org/your-project.git
+cd your-project
+```
+
+---
+
+You're now ready to use OpenOCD and interface with dev boards on your platform of choice.
