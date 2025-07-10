@@ -70,5 +70,5 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then export ARM_ARCH=x86_64; \
 ENV PATH="$PATH:${TOOLS_PATH}/bin"
 
 # Add Entrypoint script
-ADD docker/build.sh /usr/local/bin/build.sh
+ADD Docker/build.sh /usr/local/bin/build.sh
 ENTRYPOINT ["/usr/local/bin/build.sh"]
