@@ -48,7 +48,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	# Adding ${PROJ_PATH}/ to beginning of each line
 	sed -i '' 's|^|${PROJ_PATH}/|' "$CMAKE_SRC_FILE_PATH"
 
-	# Struct cmake format (Do not add tab space to line - 58)
+	# Struct cmake format (Do not add tab space to line)
 	sed -i '' '1i\
 set(source_list ${source_list}' "$CMAKE_SRC_FILE_PATH"
 	sed -i '' -e '$a\'$'\n'')' "$CMAKE_SRC_FILE_PATH"
