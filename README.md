@@ -11,15 +11,15 @@ No need to install ARM GCC or CMake on your host system. All builds run inside a
 
 Before building or flashing, make sure you have:
 
-- ✅ Docker installed and running
+- ✅ [Docker installed and running](#build-docker-image)
 - ✅ OpenOCD installed (for flashing firmware)  
 - ✅ USB access set up (especially for WSL users)
-- ✅ Set [MCU parameters and definitions](#mcu-specific-file)
+- ✅ [Set MCU parameters and definitions](#mcu-specific-file)
 
 See [Embedded Development Environment Setup Guide](#embedded-development-environment-setup-guide)
  below for platform-specific setup.
 
- ## MCU specific file
+## MCU specific file
 
 Each MCU has their own ARM compiler flags. This template is defined for STM32F4. The flags can be changed in the following module.
 
@@ -66,6 +66,29 @@ set(compiler_define ${compiler_define}
 
 &nbsp;
 
+## Build Docker Image
+
+Before you build your firmware, make sure to build the Docker image.  
+You only need to do this once unless you change the image configuration.
+
+### Step 1: Modify `project.conf` (Optional)
+
+To change the Docker image tag, edit:
+
+```bash
+DOCKER_IMAGE_NAME=stm32-compiler
+```
+Make sure the same value is updated in your Dockerfile:
+```bash
+ARG DOCKER_IMAGE_NAME=stm32-compiler
+```
+
+### Step 2:  Build the Docker Image
+Inside the /Docker folder:
+```bash
+cd Docker
+./makeimage.sh
+```
 
 ## Quick Start
 
