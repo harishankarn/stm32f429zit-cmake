@@ -1,25 +1,73 @@
-# STM32F4 CMake + Docker Project
+# STM32 CMake + Docker Project
 
-A modern STM32 firmware build system for the STM32F4 MCU, using **CMake** and **Docker** for portability and toolchain isolation.
+A modern STM32 firmware build system for the STM32F4 MCU or can be modified of any STM32xx MCU, using **CMake** and **Docker** for portability and toolchain isolation.
 
 
-## 🐳 Docker-Based Build System
+## Docker-Based Build System
 
 No need to install ARM GCC or CMake on your host system. All builds run inside a Docker container, ensuring a clean, consistent environment.
 
-## 🧰 Prerequisites
+## Prerequisites
 
 Before building or flashing, make sure you have:
 
-- ✅ Docker installed and running  
+- ✅ Docker installed and running
 - ✅ OpenOCD installed (for flashing firmware)  
 - ✅ USB access set up (especially for WSL users)
+- ✅ Set [MCU parameters and definitions](#mcu-specific-file)
 
 See [Embedded Development Environment Setup Guide](#embedded-development-environment-setup-guide)
  below for platform-specific setup.
 
+ ## MCU specific file
 
-## 🚀 Quick Start
+Each MCU has their own ARM compiler flags. This template is defined for STM32F4. The flags can be changed in the following module.
+
+> STM32F429xx_PARA.cmake
+
+```makefile
+set(CPU_PARAMETERS ${CPU_PARAMETERS}
+    -mthumb
+    -mcpu=cortex-m4
+    -mfpu=fpv4-sp-d16
+    -mfloat-abi=hard
+)
+
+set(compiler_define ${compiler_define}
+    "STM32F429xx"
+    #"USE_HAL_DRIVER" # uncomment and modify entire cmake template for HAL
+)
+
+```
+
+> **General rule for settings would be as per table below:**
+
+| STM32 Family | -mcpu           | -mfpu         | -mfloat-abi |
+| ------------ | --------------- | ------------- | ----------- |
+| STM32F0      | `cortex-m0`     | `Not used`    | `soft`      |
+| STM32F1      | `cortex-m3`     | `Not used`    | `soft`      |
+| STM32F2      | `cortex-m3`     | `Not used`    | `soft`      |
+| STM32F3      | `cortex-m4`     | `fpv4-sp-d16` | `hard`      |
+| STM32F4      | `cortex-m4`     | `fpv4-sp-d16` | `hard`      |
+| STM32F7 SP   | `cortex-m7`     | `fpv5-sp-d16` | `hard`      |
+| STM32F7 DP   | `cortex-m7`     | `fpv5-d16`    | `hard`      |
+| STM32G0      | `cortex-m0plus` | `Not used`    | `soft`      |
+| STM32C0      | `cortex-m0plus` | `Not used`    | `soft`      |
+| STM32G4      | `cortex-m4`     | `fpv4-sp-d16` | `hard`      |
+| STM32H7      | `cortex-m7`     | `fpv5-d16`    | `hard`      |
+| STM32L0      | `cortex-m0plus` | `Not used`    | `soft`      |
+| STM32L1      | `cortex-m3`     | `Not used`    | `soft`      |
+| STM32L4      | `cortex-m4`     | `fpv4-sp-d16` | `hard`      |
+| STM32L5      | `cortex-m33`    | `fpv5-sp-d16` | `hard`      |
+| STM32U5      | `cortex-m33`    | `fpv5-sp-d16` | `hard`      |
+| STM32WB      | `cortex-m4`     | `fpv4-sp-d16` | `hard`      |
+| STM32WL CM4  | `cortex-m4`     | `Not used`    | `soft`      |
+| STM32WL CM0  | `cortex-m0plus` | `Not used`    | `soft`      |
+
+&nbsp;
+
+
+## Quick Start
 
 ### One-Liner Clone & Build
 
@@ -27,7 +75,7 @@ See [Embedded Development Environment Setup Guide](#embedded-development-environ
 docker run --rm -v "$(pwd)":/app <docker-image> -r <your-project-git-url>
 ```
 
-
+&nbsp;
 
 # Embedded Development Environment Setup Guide
 
@@ -160,9 +208,6 @@ brew install openocd usbutils
 openocd --version
 lsusb
 ```
-
-> If `lsusb` fails: macOS may need additional drivers or permissions for certain USB tools. Consider using `brew install libusb` and checking `system_profiler SPUSBDataType`.
-
 ## 🐧 Linux Setup (Native Ubuntu/Debian)
 
 ### 1. Install required packages
