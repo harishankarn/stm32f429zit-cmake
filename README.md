@@ -86,7 +86,6 @@ ARG DOCKER_IMAGE_NAME=stm32-compiler
 ### Step 2:  Build the Docker Image
 Inside the /Docker folder:
 ```bash
-cd Docker
 ./makeimage.sh
 ```
 
