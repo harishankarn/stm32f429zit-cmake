@@ -23,7 +23,7 @@ See [Embedded Development Environment Setup Guide](#embedded-development-environ
 
 Each MCU has their own ARM compiler flags. This template is defined for STM32F4. The flags can be changed in the following module.
 
-> STM32F429xx_PARA.cmake
+> STM32_PARA.cmake
 
 ```makefile
 set(CPU_PARAMETERS ${CPU_PARAMETERS}
