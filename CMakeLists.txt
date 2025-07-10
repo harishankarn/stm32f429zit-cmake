@@ -19,6 +19,7 @@ set(PROJECT_NAME "${CMAKE_MATCH_1}")
 
 # Project Name    --- MUST EDIT ---
 project(${PROJECT_NAME})
+#project(stm32f429zit-cmake)
 
 enable_language(C CXX ASM)
 
@@ -29,11 +30,11 @@ set(linker_script_SRC               ${PROJ_PATH}/Core/STM32F429ZITX_FLASH.ld)
 set(EXECUTABLE                      ${CMAKE_PROJECT_NAME})
 
 # MCU Parameters - I am storing all created profiles. Pick one to use.
-# include(STM32G431xx_PARA)
-include(STM32F429xx_PARA)
+# include(STM32G431xx_HAL_PARA)
+include(STM32F429xx_HAL_PARA)
 
 if(NOT CPU_PARAMETERS)
-	message(FATAL_ERROR "CPU_PARAMETERS not set. Check _PARA file.")
+	message(FATAL_ERROR "CPU_PARAMETERS not set. Check HAL_PARA file.")
 endif()
 
 
