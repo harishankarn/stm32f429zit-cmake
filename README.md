@@ -1,20 +1,18 @@
-# STM32F429ZI CMake + Docker Project
+# STM32F4 CMake + Docker Project
 
-This project demonstrates a modern CMake-based STM32 firmware build setup for the STM32F429ZI MCU, using Docker for toolchain isolation.
+A modern STM32 firmware build system for the STM32F4 MCU, using **CMake** and **Docker** for portability and toolchain isolation.
 
 ---
 
 ## 🐳 Docker-Based Build System
 
-No need to install the ARM GCC toolchain or CMake on your host. Everything runs inside a container using [`stm32-compiler`](https://github.com/jasonyang-ee/STM32-Dockerfile).
+No need to install ARM GCC or CMake on your host system. All builds run inside a Docker container, ensuring a clean, consistent environment.
 
 ---
 
 ## 🚀 Quick Start
 
-### ✅ First-Time Compilation (Clone & Build)
-
-This clones your GitHub repo and builds it inside Docker:
+### ✅ One-Liner Clone & Build
 
 ```bash
-docker run -v "$(pwd)/../project":/app stm32-compiler -r https://github.com/harishankarn04/stm32f429zit-cmake.git
+docker run --rm -v "$(pwd)":/app <docker-image> -r <git-repo-url>
