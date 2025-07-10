@@ -28,9 +28,9 @@ set(PROJ_PATH                       ${PROJECT_SOURCE_DIR})
 set(linker_script_SRC               ${PROJ_PATH}/Core/STM32F429ZITX_FLASH.ld)
 set(EXECUTABLE                      ${CMAKE_PROJECT_NAME})
 
-# MCU Parameters - I am storing all created profiles. Pick one to use.
-# include(STM32G431xx_PARA)
-include(STM32F429xx_PARA)
+# MCU Parameters
+# include(STM32G431xx_PARA) - you can make custom .cmake files for different MCU
+include(STM32_PARA)
 
 if(NOT CPU_PARAMETERS)
 	message(FATAL_ERROR "CPU_PARAMETERS not set. Check _PARA file.")
