@@ -7,4 +7,5 @@ set(CPU_PARAMETERS ${CPU_PARAMETERS}
 
 set(compiler_define ${compiler_define}
     "STM32F429xx"
+    #"USE_HAL_DRIVER"
 )
