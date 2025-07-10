@@ -8,9 +8,14 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Kolkata
 #ARG SSH_PRIVATE_KEY
 
-# ====== Change Docker Image name ======
+# ====== Change Docker elements ======
 ARG DOCKER_IMAGE_NAME=stm32-compiler
-ENV DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME}
+ARG DOCKER_INPUT_PATH=/app
+ARG DOCKER_TYPE=Release
+
+ENV DOCKER_IMAGE_NAME=$DOCKER_IMAGE_NAME
+ENV DOCKER_INPUT_PATH=$DOCKER_INPUT_PATH
+ENV DOCKER_TYPE=$DOCKER_TYPE
 
 RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
 
