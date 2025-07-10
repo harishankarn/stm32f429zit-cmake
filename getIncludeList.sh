@@ -1,17 +1,9 @@
 #!/bin/bash
 
+# Load project name from config
+source ./project.conf
+
 # Run ./getIncludeList.sh in terminal to generate an updated list of source for CMake
-
-APP_PATH='Application'
-DEP_LIB_PATH='Application/Inc'
-CORE_PATH='Core'
-DRIVERS_PATH='Drivers'
-# FATFS_PATH='FATFS/*'
-# MIDWARE_PATH='Middlewares/*'
-# RTOS_PATH='Middlewares/Third_Party/FreeRTOS/*'
-# USB_PATH='USB_Device/*'
-
-CMAKE_INC_FILE_PATH=cmake/IncludeList.cmake
 
 # Clear the file
 > "$CMAKE_INC_FILE_PATH"
@@ -31,8 +23,8 @@ if [ -n "$CORE_PATH" ]; then
 	printf "$CORE_INC\n" >>"$CMAKE_INC_FILE_PATH"
 fi
 
-if [ -n "$DRIVERS_PATH" ]; then
-	DRIVERS_INC="$(find "$DRIVERS_PATH" -type d -name 'Inc' -o -name 'Include' -o -name 'Legacy')"
+if [ -n "$INC_DRIVERS_PATH" ]; then
+	DRIVERS_INC="$(find "$INC_DRIVERS_PATH" -type d -name 'Inc' -o -name 'Include' -o -name 'Legacy')"
 	printf "$DRIVERS_INC\n" >>"$CMAKE_INC_FILE_PATH"
 fi
 

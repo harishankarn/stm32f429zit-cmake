@@ -1,17 +1,9 @@
 #!/bin/bash
 
+# Load project name from config
+source ./project.conf
+
 # Run ./getSourceList.sh in terminal to generate an updated list of source for CMake
-
-# Define the path to the source code
-APP_PATH='Application'
-CORE_PATH='Core'
-DRIVERS_PATH='Drivers/CMSIS/Device' # <----Changed path from Drivers/* which included STM32F4xx_HAL_Driver
-
-# FATFS_PATH='FATFS/*'
-# MIDWARE_PATH='Middlewares/*'
-# USB_PATH='USB_Device/*'
-
-CMAKE_SRC_FILE_PATH=cmake/SourceList.cmake
 
 # Clear the file
 > "$CMAKE_SRC_FILE_PATH"
@@ -27,8 +19,8 @@ if [ -n "$CORE_PATH" ]; then
 	printf "$CORE_SRC\n" >> "$CMAKE_SRC_FILE_PATH"
 fi
 
-if [ -n "$DRIVERS_PATH" ]; then
-	DRIVERS_SRC="$(find "$DRIVERS_PATH" -type f -name '*.c')"
+if [ -n "$SRC_DRIVERS_PATH" ]; then
+	DRIVERS_SRC="$(find "$SRC_DRIVERS_PATH" -type f -name '*.c')"
 	printf "$DRIVERS_SRC\n" >> "$CMAKE_SRC_FILE_PATH"
 fi
 
